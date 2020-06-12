@@ -1,0 +1,373 @@
+.tikicon.icon-tiki_short {
+  background-image: url('~/assets/img/sprite.png');
+  background-position: -150px 0;
+  width: 50px;
+  height: 33px;
+}
+
+.nav-control {
+  font-weight: 400;
+  font-size: 1.2rem;
+  white-space: nowrap;
+
+  @media screen and (min-width: 992px) {
+    padding-left: 10px;
+    .nav-link {
+      padding-left: 10px;
+    }
+  }
+}
+.tikicon.icon-tracking {
+  background-image: url('~/assets/img/sprite.png');
+  background-position: -362px -52px;
+  width: 22px;
+  height: 22px;
+}
+.notification-box {
+  position: relative;
+}
+.notify-item {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  max-width: 300px;
+
+  @media screen and (max-width: 991px) {
+    width: 100%;
+    max-width: none;
+  }
+
+  .icon {
+    padding: 5px;
+    img {
+      width: 24px;
+    }
+  }
+  .notify-content {
+    width: calc(100% - 24px);
+    display: flex;
+    flex-direction: column;
+
+    .content {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+}
+.tikicon.icon-notification {
+  background-image: url('~/assets/img/sprite.png');
+  background-position: -304px -174px;
+  width: 24px;
+  height: 24px;
+}
+.notification-count {
+  font-size: 10px;
+  float: left;
+  position: absolute;
+  left: 23px;
+  top: 3px;
+  display: block;
+  text-align: center;
+  z-index: 2;
+  font-weight: 300;
+  width: 21px;
+  height: 21px;
+  background: rgb(255, 83, 83);
+  border-radius: 50%;
+  padding: 3px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(24, 158, 255);
+  border-image: initial;
+  @media screen and (max-width: 991px) {
+    left: 58px;
+    top: 20px;
+  }
+}
+.tikicon.icon-user {
+  background-image: url('~/assets/img/sprite.png');
+  background-position: -362px -25px;
+  width: 22px;
+  height: 22px;
+}
+.tikicon.icon-cart {
+  background-image: url('~/assets/img/sprite.png');
+  background-position: -333px -252px;
+  width: 19px;
+  height: 18px;
+}
+.cart-count {
+  color: rgb(74, 74, 74);
+  height: 20px;
+  display: inline-block;
+  text-align: center;
+  line-height: 20px;
+  margin-left: 9px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgb(253, 216, 53);
+  border-radius: 2px;
+  padding: 0px 6px;
+}
+
+.home-slideshow {
+  background-color: #fff;
+  padding-bottom: 15px;
+  border-radius: 5px;
+}
+
+.sidebar {
+  background-color: #ffffff;
+  border-right: solid 1px #f4f4f4;
+
+  &__title h4 {
+    padding: 15px 0 10px 0;
+    font-size: 1.35rem;
+    font-weight:700;
+  }
+
+  .list-group-item {
+    cursor: pointer;
+    border: none;
+    padding: 0 5px;
+  }
+}
+
+
+.product-list {
+  background-color: #ffffff;
+
+  &__option-box {
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  &__product-list-box {
+    font-size: 1.2rem;
+
+    .row {
+      margin: 0 -5px;
+    }
+    .col-md-3 {
+      padding: 0 5px;
+    }
+    .pagination {
+      padding-top: 15px;
+    }
+  }
+}
+.product-item {
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 5px 10px 0 rgba(#000, .3);
+  }
+
+  .content .title .tikicon.icon-tikinow {
+    position: relative;
+    display: inline-block;
+    width: 53px;
+    height: 15px;
+    margin-right: 7px;
+    background-image: url(https://salt.tikicdn.com/desktop/img/tiki-now-15.png);
+    background-size: 53px 15px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+  }
+  .price-sale>span {
+    display: block;
+  }
+  .product-image {
+    width: 100%;
+  }
+  p {
+    margin-bottom: 0.5rem;
+  }
+  .title {
+    font-size: 13px;
+    font-weight: 300;
+  }
+  .author {
+    color: #777;
+    font-size: 11px;
+  }
+  .final-price {
+    font-size: 16px;
+    font-weight: 550;
+  }
+  .sale-tag {
+    font-size: 13px;
+    color: #787878;
+    font-weight: 300;
+  }
+  .price-regular {
+    font-size: 13px;
+    color: #787878;
+    text-decoration: line-through;
+    font-weight: 300;
+  }
+}
+
+.product-detail {
+  padding: 15px 0;
+  background-color: #ffffff;
+  .product-image {
+    width: 100%;
+  }
+  .title {
+    color: rgb(51, 51, 51);
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 30px;
+    margin: 0px;
+  }
+  .brand {
+    padding-bottom: 15px;
+    .author {
+      color: rgb(51, 51, 51);
+      font-size: 13px;
+      font-weight: 400;
+      margin: 0px 20px 0px 0px;
+    }
+    .sku {
+      color: rgb(155, 155, 155);
+      font-weight: 300;
+      font-size: 12px;
+    }
+  }
+  .body {
+    .group {
+      padding: 15px 0 10px 0;
+    }
+    .price {
+      color: rgb(255, 52, 37);
+      font-size: 19px;
+      font-weight: 500;
+      margin: 0px;
+    }
+    .original-price {
+      color: rgb(155, 155, 155);
+      font-size: 13px;
+      font-weight: 300;
+      span {
+        color: rgb(255, 52, 37);
+        font-weight: 400;
+      }
+    }
+    .label {
+      color: rgb(123, 123, 123);
+      font-size: 11px;
+      margin: 0px 0px 6px;
+    }
+    .quanity-buy-favorite {
+      display: flex;
+    }
+    .quanity button {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      background-color: rgb(255, 255, 255);
+      border-width: 1px;
+      border-style: solid;
+      border-color: rgb(236, 236, 236);
+      border-image: initial;
+      color: rgb(36, 36, 36);
+      font-size: 14px;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+      &:hover {
+        background-color: rgb(236, 236, 236);
+      }
+      &:first-child {
+        border-right: none;
+        border-radius: 4px 0px 0px 4px;
+      }
+      &:last-child {
+        border-left: none;
+        border-radius: 0px 4px 4px 0px;
+      }
+    }
+    input {
+      width: 40px;
+      border-width: 1px;
+      border-style: solid;
+      border-image: initial;
+      border-color: rgb(236, 236, 236);
+      height: 30px;
+      color: rgb(36, 36, 36);
+      font-size: 14px;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+      &:focus {
+        box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px inset, rgba(102, 175, 233, 0.6) 0px 0px 8px;
+        border-color: rgb(102, 175, 237);
+      }
+    }
+    .btn-add-to-cart {
+      color: rgb(255, 255, 255);
+      background-color: rgb(255, 57, 69);
+      cursor: pointer;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      min-width: 190px;
+      width: 100%;
+      height: 40px;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      border-width: initial;
+      border-style: none;
+      border-color: initial;
+      border-image: initial;
+      border-radius: 4px;
+      outline: none;
+    }
+    .tikicon.icon-add-to-cart2x {
+      background-image: url('~/assets/img/sprite.png');
+      background-position: -362px 0px;
+      width: 25px;
+      height: 20px;
+    }
+    .btn-add-favorite {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      color: rgb(133, 133, 133);
+      font-size: 32px;
+      background-color: transparent;
+      padding-left: 15px;
+      border-width: initial;
+      border-style: none;
+      border-color: initial;
+      border-image: initial;
+      outline: none;
+      &:hover {
+        color: rgb(242, 120, 113);
+      }
+    }
+    .buy-favorite {
+      display: flex;
+      align-items: flex-end;
+      padding-left: 15px;
+    }
+  }
+  .detail-info {
+    h3 {
+      font-weight: 600;
+      margin: 25px 0 5px 0;
+    }
+    table tbody tr td:first-child {
+      color: rgb(79, 79, 79);
+      font-size: 13px;
+      font-weight: 700;
+      background: rgb(239, 239, 239);
+    }
+  }
+}
