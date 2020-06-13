@@ -26,3 +26,9 @@ body {
 .label-link {
   text-decoration: none;
 }
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}

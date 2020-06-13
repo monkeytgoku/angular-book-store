@@ -1,5 +1,5 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="margin-bottom: 15px;">
+<header class="fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <i class="tikicon icon-tiki_short"></i>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,18 +9,6 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">English Books</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Sách tiếng Việt</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Quà lưu niệm</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Văn phòng phẩm</a>
         </li>
       </ul>
 
@@ -73,14 +61,16 @@
           </ul>
         </div>
         <div class="collapse navbar-collapse nav-control" id="navbar">
+          <i class="tikicon icon-user"></i>
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Chào<br>{{ user.firstName + ' ' + user.lastName }}
+                Chào<br>{{ user.name }}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">Đơn hàng của tôi</a>
-                <a class="dropdown-item" href="#">Tài khoản của tôi</a>
+                <a class="dropdown-item" href="#">Quản lý đơn hàng</a>
+                <a class="dropdown-item" href="#">Quản lý sản phẩm</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Thoát tài khoản</a>
               </div>
@@ -91,7 +81,7 @@
           <i class="tikicon icon-cart"></i>
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-              <span class="nav-link">
+              <span class="nav-link" style="cursor: pointer;">
                 Giỏ hàng
                 <span class="cart-count">1</span>
               </span>
@@ -105,7 +95,7 @@
 
 <!-- slideshow -->
 <div class="container home-slideshow">
-  <div id="home-slideshow" class="carousel slide" data-ride="carousel">
+  <div id="home-slideshow" class="carousel slide" data-ride="carousel" style="margin: 0 -15px;">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="https://salt.tikicdn.com/cache/w885/ts/banner/79/7d/85/486a93958783eaaa7fc068abcc748494.jpg" class="d-block w-100" alt="...">
@@ -151,16 +141,6 @@
         <li class="list-group-item">Nguyễn Nhật Ánh</li>
         <li class="list-group-item">Eiichiro Oda</li>
         <li class="list-group-item">Fujiko F Fujio</li>
-      </ul>
-      <div class="dropdown-divider"></div>
-      <div class="sidebar__title">
-        <h4>NHÀ CUNG CẤP</h4>
-      </div>
-      <ul class="list-group">
-        <li class="list-group-item">Tiki Trading</li>
-        <li class="list-group-item">GOLD BOOK</li>
-        <li class="list-group-item">AZ Book</li>
-        <li class="list-group-item">Time Books</li>
       </ul>
     </div>
     <div class="col-md-10 product-list">
@@ -391,7 +371,6 @@
             (Paperback)</h1>
           <div class="brand">
             <span class="author">Tác giả: <a href="#">Guinness World Records</a></span>
-            <span class="sku">SKU: 3636345341125</span>
           </div>
         </div>
         <div class="body">
@@ -428,10 +407,6 @@
         </thead>
         <tbody>
           <tr>
-            <td>Công ty phát hành</td>
-            <td>Macmillan Publishers</td>
-          </tr>
-          <tr>
             <td>Nhà xuất bản</td>
             <td>MacMillan Publishers</td>
           </tr>
@@ -447,24 +422,12 @@
             <td>Số trang</td>
             <td>216</td>
           </tr>
-          <tr>
-            <td>SKU</td>
-            <td>5664252449298</td>
-          </tr>
         </tbody>
       </table>
-      <h3>MÔ TẢ SẢN PHẨM</h3>
-      <div>
-        <p>Whether it's the biggest, the smallest, the fastest, the deadliest or just the downright weirdest, Guinness World Records: Wild Things turns the spotlight on the best of the beasts!</p>
-        <p>From gentle giants to killer bugs, powerful predators to cunning prey, and backyard wildlife to species on the brink, the animal kingdom is crawling with record-breakers. Wild Things is your ultimate guide to nature's super-star animals.</p>
-        <p>There's a special chapter all about prehistoric record-breakers, too. Unearth which ancient animals ruled over the real Jurassic world, from the tallest dinosaur and the dino with the most powerful bite to the largest flying creature ever to soar Earth's skies - with a wingspan the size of an F-16 jet!</p>
-        <p>You'll also hear from zoology experts and some of the biggest conservation stars including Sir David Attenborough, Dame Jane Goodall, the Irwin family and Deadly 60's Steve Backshall. They share their standout wildlife experiences and favourite record-breaking animals, as well as top tips for anyone hoping to follow in their footsteps.</p>
-        <p>Ready to find out where the real wild things are - and the records that they hold? Then it's time to unleash the wildest GWR book yet!</p><p>Giá sản phẩm trên Tiki đã bao gồm thuế theo luật hiện hành. Tuy nhiên tuỳ vào từng loại sản phẩm hoặc phương thức, địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển, phụ phí hàng cồng kềnh, ...</p>
-      </div>
     </div>
   </div>
 </div>
 
 <footer>
-  <div style="margin-top: 15px;">Copyright</div>
+  <div style="padding: 25px;margin-top: 15px; background-color: #189eff;">Copyright © 2020 Rocket2 NEU</div>
 </footer>
