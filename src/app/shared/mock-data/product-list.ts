@@ -56,7 +56,7 @@ export const products: Product[] = [
     {
         $key: '5',
         title: 'Bạn Đắt Giá Bao Nhiêu?',
-        imageUrl: 'https://salt.tikicdn.com/cache/280x280/ts/product/57/44/86/19de0644beef19b9b885d0942f7d6f25.jpg',
+        imageUrl: 'https://salt.tikicdn.com/cache/280x280/ts/product/87/c9/c0/bfebf4adcb31c8eb5c39fd3779cc4b68.jpg',
         author: 'Vãn Tình',
         finalPrice: 65.388,
         regularPrice: 99.000,
@@ -69,7 +69,7 @@ export const products: Product[] = [
     {
         $key: '6',
         title: 'Đời Ngắn Đừng Ngủ Dài (Tái Bản)',
-        imageUrl: 'https://salt.tikicdn.com/cache/280x280/ts/product/eb/62/6b/0e56b45bddc01b57277484865818ab9b.jpg',
+        imageUrl: 'https://salt.tikicdn.com/cache/280x280/ts/product/57/44/86/19de0644beef19b9b885d0942f7d6f25.jpg',
         author: 'Robin Sharma',
         finalPrice: 44.357,
         regularPrice: 75.000,

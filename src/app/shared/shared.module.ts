@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { QuantityComponent } from './components/quantity/quantity.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [QuantityComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [QuantityComponent]
 })
 export class SharedModule { }

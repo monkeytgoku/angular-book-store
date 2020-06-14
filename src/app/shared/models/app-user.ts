@@ -3,5 +3,6 @@ export interface AppUser {
     name: string;
     password?: string;
     email: string;
+    mobile: string;
     isAdmin: boolean;
 }

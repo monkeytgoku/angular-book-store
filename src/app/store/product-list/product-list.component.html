@@ -1,0 +1,19 @@
+<!-- slideshow -->
+<app-product-slideshow></app-product-slideshow>
+<!-- content -->
+<div class="row product-list-wrapper">
+  <div class="col-md-2 product-sidebar">
+    <app-product-sidebar [publishers]="publishers" [authors]="authors"></app-product-sidebar>
+  </div>
+  <div class="col-md-10 product-list">
+    <app-product-filter></app-product-filter>
+  <div class="product-list__product-list-box">
+    <div class="row">
+      <div class="col-md-3" *ngFor="let product of products">
+        <app-product-item [product]="product"></app-product-item>
+      </div>
+    </div>
+    <app-product-paging></app-product-paging>
+  </div>
+  </div>
+</div>
