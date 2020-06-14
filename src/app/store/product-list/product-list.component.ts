@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { products } from 'src/app/shared/mock-data/product-list';
 import { Product } from 'src/app/shared/models/product';
 
@@ -9,6 +9,9 @@ import { Product } from 'src/app/shared/models/product';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
+  @Output() selectProduct = new EventEmitter<string>();
+  // @Output('selectProduct') selectProduct2 = new EventEmitter<string>();
+
   products: Product[] = [];
   publishers: string[];
   authors: string[];
@@ -25,6 +28,11 @@ export class ProductListComponent implements OnInit {
     });
     this.publishers = Object.keys(publishersObj);
     this.authors = Object.keys(authorsObj);
+  }
+
+  onSelectedProduct(productId): void {
+    this.selectProduct.emit(productId);
+    // this.selectProduct2.emit(productId);
   }
 
 }
