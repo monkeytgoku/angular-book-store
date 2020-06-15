@@ -15,6 +15,7 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   publishers: string[];
   authors: string[];
+  originProducts = products;
 
   constructor() { }
 
@@ -30,9 +31,21 @@ export class ProductListComponent implements OnInit {
     this.authors = Object.keys(authorsObj);
   }
 
+  trackByFn(index, item) {
+    return item.$key;
+  }
+
   onSelectedProduct(productId): void {
     this.selectProduct.emit(productId);
     // this.selectProduct2.emit(productId);
+  }
+
+  search(searchValue): void {
+    const lsSearchValue = searchValue.toLocaleLowerCase();
+    this.products = this.originProducts.filter(
+      ele => ele.title.toLocaleLowerCase().includes(lsSearchValue)
+      || ele.author.toLocaleLowerCase().includes(lsSearchValue)
+    );
   }
 
 }

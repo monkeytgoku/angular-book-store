@@ -9,6 +9,8 @@ export class ProductSidebarComponent implements OnInit {
   @Input() publishers: string[];
   @Input() authors: string[];
 
+  isEnableClass = true;
+
   constructor() { }
 
   ngOnInit(): void {
