@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { products } from 'src/app/shared/mock-data/product-list';
 import { Product } from 'src/app/shared/models/product';
+import { StoreService } from '../services/store.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class ProductListComponent implements OnInit {
   authors: string[];
   originProducts = products;
 
-  constructor() { }
+  constructor(private storeService: StoreService) { }
 
   ngOnInit(): void {
     this.products = products;
@@ -38,6 +39,7 @@ export class ProductListComponent implements OnInit {
   onSelectedProduct(productId): void {
     this.selectProduct.emit(productId);
     // this.selectProduct2.emit(productId);
+    // this.storeService.setSelectedProductId(productId);
   }
 
   search(searchValue): void {

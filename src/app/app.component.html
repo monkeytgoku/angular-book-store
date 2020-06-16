@@ -3,8 +3,10 @@
 
 <!-- body -->
 <div class="container">
-  <app-product-list (selectProduct)="handleSelectedProduct($event)"></app-product-list>
-  <app-product-detail [productId]="selectedProductId"></app-product-detail>
+  <!-- <button (click)="productList.search('vui')">search</button> -->
+  <!-- <button (click)="search()">search</button> -->
+  <app-product-list #productList (selectProduct)="handleSelectedProduct($event)"></app-product-list>
+  <app-product-detail [productId]="selectedProductId" [item]="selectedProductId"></app-product-detail>
   <app-shopping-cart></app-shopping-cart>
   <app-shipping-form></app-shipping-form>
   <app-check-out></app-check-out>

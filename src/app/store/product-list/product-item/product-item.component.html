@@ -24,14 +24,14 @@
         <!-- <i class="tikicon icon-tikinow" [hidden]="product.isTikiNow"></i>
         <i [hidden]="!product.isTikiNow">No tikinow</i> -->
 
-        {{ product.title }}
+        {{ product.title | titlecase }}
     </p>
     <p class="author">{{ product.author }}</p>
     <p class="price-sale">
         <span class="final-price">
-        {{ product.finalPrice }}đ <span class="sale-tag sale-tag-square">-{{ (product.finalPrice*100/product.regularPrice).toFixed() }}%</span>
+        {{ product.finalPrice | price }} <span class="sale-tag sale-tag-square">{{ product.finalPrice | discount:product.regularPrice:'-' }}</span>
         </span>
-        <span class="price-regular">{{ product.regularPrice }}đ</span>
+        <span class="price-regular">{{ product.regularPrice | price }}</span>
     </p>
     </div>
 </div>

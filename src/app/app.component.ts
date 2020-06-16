@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Product } from './shared/models/product';
+import { Component, ViewChild } from '@angular/core';
+import { ProductListComponent } from './store/product-list/product-list.component';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +8,18 @@ import { Product } from './shared/models/product';
 })
 
 export class AppComponent {
+  // @ViewChild('productList') productList: ProductListComponent;
+  // @ViewChild(ProductListComponent) productList: ProductListComponent;
+
   selectedProductId: string;
 
   constructor() {}
 
   handleSelectedProduct(productId: string): void {
-    console.log(productId);
     this.selectedProductId = productId;
   }
+
+  // search() {
+  //   this.productList.search('vui');
+  // }
 }

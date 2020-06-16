@@ -14,9 +14,9 @@
             </div>
             <div class="body">
                 <div class="group">
-                    <p class="price">{{ product?.finalPrice }}₫</p>
-                    <p class="original-price first-child">Tiết kiệm: <span>{{ (product?.finalPrice*100/product?.regularPrice).toFixed() }}%</span> ({{ product?.regularPrice-product?.finalPrice }}₫)</p>
-                    <p class="original-price">Giá thị trường: {{ product?.regularPrice }}₫</p>
+                    <p class="price">{{ product?.finalPrice | price }}</p>
+                    <p class="original-price first-child">Tiết kiệm: <span>{{ product?.finalPrice | discount:product?.regularPrice }}</span> ({{ product?.regularPrice-product?.finalPrice | price }})</p>
+                    <p class="original-price">Giá thị trường: {{ product?.regularPrice | price }}</p>
                 </div>
                 <div class="group border-top quantity-buy-favorite">
                     <app-quantity (changeQuantity)="handleChangedQuantity($event)"></app-quantity>
