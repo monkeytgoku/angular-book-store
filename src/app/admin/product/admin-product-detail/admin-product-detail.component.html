@@ -1,0 +1,76 @@
+<div class="row product-detail" *ngIf="product">
+  <div class="col-md-12">
+    <h3>{{ product.title }}</h3>
+  </div>
+  <div class="col-md-4">
+      <img class="product__image"
+          [src]="product.imageUrl"
+          [alt]="product.title">
+  </div>
+  <div class="col-md-8  product__prop">
+    <div class="row">
+      <div class="col-md-3 product__key">ID</div>
+      <div class="col-md-9 product__value text-ellipsis" [title]="product.$key">
+        {{ product.$key }}
+      </div>
+
+      <div class="col-md-3 product__key">Title</div>
+      <div class="col-md-9 product__value text-ellipsis" [title]="product.title">
+        {{ product.title }}
+      </div>
+
+      <div class="col-md-3 product__key">Image Url</div>
+      <div class="col-md-9 product__value text-ellipsis" [title]="product.imageUrl">
+        {{ product.imageUrl }}
+      </div>
+
+      <div class="col-md-3 product__key">Author</div>
+      <div class="col-md-9 product__value text-ellipsis" [title]="product.author">
+        {{ product.author }}
+      </div>
+
+      <div class="col-md-3 product__key">Final Price</div>
+      <div class="col-md-9 product__value text-ellipsis" [title]="product.finalPrice">
+        {{ product.finalPrice | price }}
+      </div>
+
+      <div class="col-md-3 product__key">Regular Price</div>
+      <div class="col-md-9 product__value text-ellipsis" [title]="product.regularPrice">
+        {{ product.regularPrice | price }}
+      </div>
+
+      <div class="col-md-3 product__key">Publisher</div>
+      <div class="col-md-9 product__value text-ellipsis" [title]="product.publisher">
+        {{ product.publisher }}
+      </div>
+
+      <div class="col-md-3 product__key">Published Date</div>
+      <div class="col-md-9 product__value text-ellipsis" [title]="product.publishedDate">
+        {{ product.publishedDate }}
+      </div>
+
+      <div class="col-md-3 product__key">Size</div>
+      <div class="col-md-9 product__value text-ellipsis" [title]="product.size">
+        {{ product.size }}
+      </div>
+
+      <div class="col-md-3 product__key">Page Count</div>
+      <div class="col-md-9 product__value text-ellipsis" [title]="product.pageCount">
+        {{ product.pageCount }}
+      </div>
+      <div class="col-md-3 product__key">TikiNow</div>
+      <div class="col-md-9 product__value" [title]="product.isTikiNow">
+        <i class="fas fa-check-square" style="color: #007bff;" *ngIf="product.isTikiNow else noTikiNow"></i>
+        <ng-template #noTikiNow>
+          <i class="far fa-times-circle" style="color: #d44950;"></i>
+        </ng-template>
+      </div>
+    </div>
+    <!-- <div class="row product__prop" *ngFor="let prop of productKeys">
+      <div class="col-md-3 product__key">{{ prop }}</div>
+      <div class="col-md-9 product__value text-ellipsis" [title]="product[prop]">
+        {{ prop.toLocaleLowerCase().includes('price') ? (product[prop] | price) : product[prop] }}
+      </div>
+    </div> -->
+  </div>
+</div>

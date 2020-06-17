@@ -8,9 +8,6 @@ import { ProductListComponent } from './store/product-list/product-list.componen
 })
 
 export class AppComponent {
-  // @ViewChild('productList') productList: ProductListComponent;
-  // @ViewChild(ProductListComponent) productList: ProductListComponent;
-
   selectedProductId: string;
 
   constructor() {}
@@ -18,8 +15,4 @@ export class AppComponent {
   handleSelectedProduct(productId: string): void {
     this.selectedProductId = productId;
   }
-
-  // search() {
-  //   this.productList.search('vui');
-  // }
 }

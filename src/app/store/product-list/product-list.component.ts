@@ -11,7 +11,6 @@ import { StoreService } from '../services/store.service';
 })
 export class ProductListComponent implements OnInit {
   @Output() selectProduct = new EventEmitter<string>();
-  // @Output('selectProduct') selectProduct2 = new EventEmitter<string>();
 
   products: Product[] = [];
   publishers: string[];
@@ -38,7 +37,6 @@ export class ProductListComponent implements OnInit {
 
   onSelectedProduct(productId): void {
     this.selectProduct.emit(productId);
-    // this.selectProduct2.emit(productId);
     // this.storeService.setSelectedProductId(productId);
   }
 
