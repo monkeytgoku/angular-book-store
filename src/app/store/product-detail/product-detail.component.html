@@ -1,22 +1,24 @@
-<div class="row product-detail">
+<div class="row product-detail" *ngIf="product">
     <div class="col-md-5">
         <img class="product-image"
-            [src]="product?.imageUrl || ''"
-            [alt]="product?.title">
+            [src]="product.imageUrl || ''"
+            [alt]="product.title">
     </div>
     <div class="col-md-7">
         <div>
             <div class="header border-bottom">
-                <h1 class="title">{{ product?.title }}</h1>
+                <h1 class="title">{{ product.title }}</h1>
                 <div class="brand">
-                    <span class="author">Tác giả: <a href="#">{{ product?.author }}</a></span>
+                    <span class="author">Tác giả: <a href="#">{{ product.author }}</a></span>
                 </div>
             </div>
             <div class="body">
                 <div class="group">
-                    <p class="price">{{ product?.finalPrice | price }}</p>
-                    <p class="original-price first-child">Tiết kiệm: <span>{{ product?.finalPrice | discount:product?.regularPrice }}</span> ({{ product?.regularPrice-product?.finalPrice | price }})</p>
-                    <p class="original-price">Giá thị trường: {{ product?.regularPrice | price }}</p>
+                    <p class="price">{{ product.finalPrice | price }}</p>
+                    <p class="original-price first-child">
+                      Tiết kiệm: <span>{{ product.finalPrice | discount:product.regularPrice }}</span> ({{ product.regularPrice-product.finalPrice | price }})
+                    </p>
+                    <p class="original-price">Giá thị trường: {{ product.regularPrice | price }}</p>
                 </div>
                 <div class="group border-top quantity-buy-favorite">
                     <app-quantity (changeQuantity)="handleChangedQuantity($event)"></app-quantity>
@@ -40,19 +42,19 @@
             <tbody>
                 <tr>
                     <td>Nhà xuất bản</td>
-                    <td>MacMillan Publishers</td>
+                    <td>{{ product.publisher }}</td>
                 </tr>
                 <tr>
                     <td>Ngày xuất bản</td>
-                    <td>11-2018</td>
+                    <td>{{ product.publishedDate }}<</td>
                 </tr>
                 <tr>
                     <td>Kích thước</td>
-                    <td>190 x 264 x 11 mm</td>
+                    <td>{{ product.size }}</td>
                 </tr>
                 <tr>
                     <td>Số trang</td>
-                    <td>216</td>
+                    <td>{{ product.pageCount }}</td>
                 </tr>
             </tbody>
         </table>

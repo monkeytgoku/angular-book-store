@@ -11,7 +11,6 @@
     <div class="row">
       <div class="col-md-3" *ngFor="let product of products; index as i; trackBy: trackByFn">
         <app-product-item [product]="product" (click)="onSelectedProduct(product.$key)"></app-product-item>
-        <!-- <app-product-item bind-product="product" on-click="onSelectedProduct(product.$key)"></app-product-item> -->
       </div>
       <!-- <ng-template ngFor let-product [ngForOf]="products" let-i="index">
         <div class="col-md-3">

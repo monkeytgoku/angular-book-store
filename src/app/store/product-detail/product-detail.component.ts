@@ -12,7 +12,6 @@ export class ProductDetailComponent implements OnInit, OnChanges {
   @Input() productId: string;
 
   product: Product;
-  private _item: Product;
 
   constructor(private storeService: StoreService) { }
 
@@ -24,15 +23,6 @@ export class ProductDetailComponent implements OnInit, OnChanges {
     this.storeService.selectedProductId$.subscribe(pid => {
       this.product = products.find(ele => ele.$key === pid);
     });
-  }
-
-  @Input()
-  set item(pid: any) {
-    this._item = products.find(ele => ele.$key === pid);
-  }
-
-  get item() {
-    return this._item;
   }
 
   handleChangedQuantity(quantity) {
