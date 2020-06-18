@@ -21,7 +21,7 @@ export class QuantityComponent implements OnInit {
   }
 
   decrease() {
-    if (this.quantity === 0) {
+    if (this.quantity === 1) {
       return;
     }
     this.quantity--;
