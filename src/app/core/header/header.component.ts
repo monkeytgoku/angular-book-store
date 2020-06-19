@@ -28,9 +28,7 @@ export class HeaderComponent implements OnInit {
     this.authService.$isLoggedInUser.subscribe(result => {
       this.isLoggedInUser = result;
       if (result) {
-        console.log(this.authService.appUser);
         this.user = this.authService.appUser;
-        console.log(this.authService.appUser, this.user);
       }
     });
   }

@@ -1,0 +1,104 @@
+<form ngForm #productForm="ngForm" class="needs-validation" novalidate class="product-form">
+  <div class="form-row">
+    <div class="col-md-4">
+      <img class="product__image" [src]="imageUrl.value" [alt]="title.value" style="width: 100%;">
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="inputTitle">Title</label>
+        <input type="text" class="form-control" id="inputTitle"
+          ngModel #title="ngModel" name="title"
+          required>
+        <div class="invalid-tooltip">
+          Please provide a title.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputImageUrl">Image Url</label>
+        <input type="text" class="form-control" id="inputImageUrl"
+          ngModel #imageUrl="ngModel" name="imageUrl"
+          required pattern="(http(s?)://).+\.(jpg|jpeg|gif|png)">
+        <div class="invalid-tooltip" *ngIf="imageUrl.invalid && imageUrl.errors.required">
+          Please provide an image url.
+        </div>
+        <div class="invalid-tooltip" *ngIf="imageUrl.invalid && imageUrl.errors.pattern">
+          Please provide a valid image url.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputAuthor">Author</label>
+        <input type="text" class="form-control" id="inputAuthor"
+          ngModel #author="ngModel" name="author"
+          required>
+        <div class="invalid-tooltip">
+          Please provide an author.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputFinalPrice">Final Price</label>
+        <input type="number" class="form-control" id="inputFinalPrice"
+          ngModel #finalPrice="ngModel" name="finalPrice"
+          required>
+        <div class="invalid-tooltip">
+          Please provide a final price.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputRegularPrice">Regular Price</label>
+        <input type="number" class="form-control" id="inputRegularPrice"
+          ngModel #regularPrice="ngModel" name="regularPrice"
+          required>
+          <div class="invalid-tooltip">
+            Please provide a regular price.
+          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="inputPublisher">Publisher</label>
+        <select class="form-control" id="inputPublisher"
+          ngModel #publisher="ngModel" name="publisher"
+          required>
+          <option selected></option>
+          <option *ngFor="let p of publishers" [value]="p.$key">{{ p.value }}</option>
+        </select>
+        <div class="invalid-tooltip">
+          Please provide a publisher.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPublishedDate">Published Date</label>
+        <input type="text" class="form-control" id="inputPublishedDate"
+          ngModel #publisherDate="ngModel" name="publisherDate">
+      </div>
+      <div class="form-group">
+        <label for="inputSize">Size</label>
+        <input type="string" class="form-control" id="inputSize"
+          ngModel #size="ngModel" name="size">
+      </div>
+      <div class="form-group">
+        <label for="inputPageCount">Page Count</label>
+        <input type="number" class="form-control" id="inputPageCount"
+          ngModel #pageCount="ngModel" name="pageCount">
+      </div>
+      <div class="form-group">
+        <label for="inputTikiNow">TikiNow</label>
+        <div class="form-control">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="inlineTikiNow1" value="1"
+              [(ngModel)]="defaultTikiNow" #pageCount="ngModel" name="isTikiNow">
+            <label class="form-check-label" for="inlineTikiNow1">Active</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="inlineTikiNow0" value="0"
+            [(ngModel)]="defaultTikiNow" #pageCount="ngModel" name="isTikiNow">
+            <label class="form-check-label" for="inlineTikiNow0">InActive</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align: right;margin-top: 15px;">
+    <button class="btn btn-primary" [disabled]="productForm.invalid" (click)="submit(productForm)">Submit</button>
+  </div>
+</form>
