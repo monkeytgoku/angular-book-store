@@ -15,7 +15,9 @@ export class AdminProductFormComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.publishers = publishers;
+    setTimeout(() => {
+      this.publishers = publishers;
+    }, 3000);
   }
 
   submit(productForm) {

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
@@ -11,7 +11,8 @@ import { RegisterComponent } from './register/register.component';
   declarations: [HeaderComponent, FooterComponent, LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [HeaderComponent, FooterComponent, LoginComponent, RegisterComponent]
 })
