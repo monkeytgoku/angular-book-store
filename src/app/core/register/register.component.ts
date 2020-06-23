@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { forbiddenNameValidator } from 'src/app/shared/directives/forbidden-name.directive';
 
 @Component({
   selector: 'app-register',
@@ -15,22 +16,36 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
-      name: new FormControl('', Validators.required),
+      name: new FormControl('', [Validators.required, forbiddenNameValidator(/admin/i)]),
       email: new FormControl('', Validators.required),
       mobile: new FormControl('', Validators.required),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      social: new FormGroup({
+        facebook: new FormControl(),
+        twitter: new FormControl()
+      })
     });
+
     // this.registerForm = this.fb.group({
     //   name: this.fb.control('', Validators.required),
     //   email: this.fb.control('', Validators.required),
     //   mobile: this.fb.control('', Validators.required),
-    //   password: this.fb.control('', [Validators.required, Validators.minLength(6)])
+    //   password: this.fb.control('', [Validators.required, Validators.minLength(6)]),
+    //   social: this.fb.group({
+    //     facebook: this.fb.control(''),
+    //     twitter: this.fb.control('')
+    //   })
     // });
+
     // this.registerForm = this.fb.group({
     //   name: ['', Validators.required],
     //   email: ['', Validators.required],
     //   mobile: ['', Validators.required],
-    //   password: ['', [Validators.required, Validators.minLength(6)]]
+    //   password: ['', [Validators.required, Validators.minLength(6)]],
+    //   social: this.fb.group({
+    //     facebook: [''],
+    //     twitter: ['']
+    //   })
     // });
 
     // this.registerForm = this.fb.group({
