@@ -21,8 +21,4 @@ export class AppComponent implements OnInit {
   handleSelectedProduct(productId: string): void {
     this.selectedProductId = productId;
   }
-
-  handleYesConfirm() {
-    console.log('btn Yes was clicked!');
-  }
 }

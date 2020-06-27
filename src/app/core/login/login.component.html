@@ -1,5 +1,6 @@
 <!-- Modal -->
-<div #loginModal class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true" data-backdrop="static">
+<div #loginModal class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+  aria-labelledby="loginModalLabel" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -10,7 +11,7 @@
       </div>
       <div class="modal-body">
         <form #loginForm="ngForm" ngForm>
-          <div *ngIf="invalidUser" class="badge badge-danger" style="padding: 10px;text-align: center;width: 100%;background-color: #ffdce0;color: #86181d;margin-bottom: 10px;">
+          <div *ngIf="invalidUser" class="badge badge-danger summary-errors">
             Incorrect email or password.
           </div>
           <div class="form-group">
@@ -30,11 +31,9 @@
           <div class="form-group">
             <label for="loginInputPassword1">Mật khẩu</label>
             <input type="password" class="form-control" id="loginInputPassword1"
-              required minlength="6"
-              ngModel #password="ngModel" name="password">
-            <div *ngIf="password.touched
-              && password.invalid
-              && password.errors.required"
+              ngModel #password="ngModel" name="password"
+              required minlength="6">
+            <div *ngIf="password.touched && password.invalid && password.errors.required"
               class="invalid-feedback">Please provide a password.
             </div>
             <div *ngIf="password.touched && password.invalid && password.errors.minlength" class="invalid-feedback">
