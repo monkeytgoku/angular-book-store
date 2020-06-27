@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { ProductListComponent } from './store/product-list/product-list.component';
+import { Component, OnInit } from '@angular/core';
+
 import { AuthService } from './shared/services/auth.service';
 
 @Component({
@@ -8,11 +8,14 @@ import { AuthService } from './shared/services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   selectedProductId: string;
 
   constructor(private authService: AuthService) {
     authService.refreshToken();
+  }
+
+  ngOnInit(): void {
   }
 
   handleSelectedProduct(productId: string): void {

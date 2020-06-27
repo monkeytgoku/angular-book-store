@@ -60,7 +60,7 @@
           ngModel #publisher="ngModel" name="publisher"
           required>
           <option selected></option>
-          <option *ngFor="let p of publishers" [value]="p.$key">{{ p.value }}</option>
+          <option *ngFor="let p of publishers" [value]="p.value">{{ p.value }}</option>
         </select>
         <div class="invalid-tooltip">
           Please provide a publisher.
@@ -85,12 +85,12 @@
         <label for="inputTikiNow">TikiNow</label>
         <div class="form-control">
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="inlineTikiNow1" value="1"
+            <input class="form-check-input" type="radio" id="inlineTikiNow1" [value]="true"
               [(ngModel)]="defaultTikiNow" #pageCount="ngModel" name="isTikiNow">
             <label class="form-check-label" for="inlineTikiNow1">Active</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="inlineTikiNow0" value="0"
+            <input class="form-check-input" type="radio" id="inlineTikiNow0" [value]="false"
             [(ngModel)]="defaultTikiNow" #pageCount="ngModel" name="isTikiNow">
             <label class="form-check-label" for="inlineTikiNow0">InActive</label>
           </div>

@@ -26,7 +26,6 @@
             <div *ngIf="email.touched && email.invalid && email.errors.forbiddenName" class="invalid-feedback">
               Invalid email.
             </div>
-            <!-- <div class="invalid-feedback">Please provide an email.</div> -->
           </div>
           <div class="form-group">
             <label for="loginInputPassword1">Mật khẩu</label>
@@ -42,16 +41,6 @@
               The password must be at least {{ password.errors.minlength.requiredLength }} characters.
             </div>
           </div>
-          <fieldset ngModelGroup="social">
-            <div class="form-group">
-              <label for="login-url-fb">Facebook</label>
-              <input class="form-control" type="url" id="login-url-fb" ngModel name="facebook">
-            </div>
-            <div class="form-group">
-              <label for="login-url-twt">Twitter</label>
-              <input class="form-control" type="url" id="login-url-twt" ngModel name="twitter">
-            </div>
-          </fieldset>
         </form>
       </div>
       <div class="modal-footer">

@@ -1,20 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AdminProductDetailComponent } from './product/admin-product-detail/admin-product-detail.component';
-import { AdminProductListComponent } from './product/admin-product-list/admin-product-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { AdminProductDetailComponent } from './product/admin-product-detail/admin-product-detail.component';
 import { AdminProductFormComponent } from './product/admin-product-form/admin-product-form.component';
-import { FormsModule } from '@angular/forms';
+import { AdminProductListComponent } from './product/admin-product-list/admin-product-list.component';
+import {
+  AdminProductReactiveFormComponent,
+} from './product/admin-product-reactive-form/admin-product-reactive-form.component';
 
 
 
 @NgModule({
-  declarations: [AdminProductListComponent, AdminProductDetailComponent, AdminProductFormComponent],
+  declarations: [AdminProductListComponent, AdminProductDetailComponent, AdminProductFormComponent, AdminProductReactiveFormComponent],
   imports: [
     CommonModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     AdminProductListComponent

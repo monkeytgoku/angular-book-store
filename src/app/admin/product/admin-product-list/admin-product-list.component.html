@@ -1,6 +1,6 @@
 <div class="fit-body">
   <div style="text-align: right; padding-bottom: 15px;">
-    <button type="button" class="btn btn-primary" (click)="isAdding = true">Add Product</button>
+    <button type="button" class="btn btn-primary" (click)="isAdding = !isAdding">Add Product</button>
   </div>
   <table class="table table-hover">
     <thead>
@@ -8,7 +8,7 @@
         <th scope="col">Title</th>
         <th scope="col">Author</th>
         <th scope="col">Publisher</th>
-        <th></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -17,8 +17,9 @@
         <td>{{ p.author }}</td>
         <td>{{ p.publisher }}</td>
         <td>
-          <button type="button" class="btn btn-info" style="margin-right: 10px;" (click)="viewDetail(p)">Detail</button>
-          <button type="button" class="btn btn-success">Edit</button>
+          <button type="button" class="btn btn-info" (click)="viewDetail(p)">Detail</button>
+          <button type="button" class="btn btn-success" (click)="editProduct(p)">Edit</button>
+          <button type="button" class="btn btn-danger" (click)="deleteProduct(p)" data-toggle="modal" data-target="#popupConfirm">Delete</button>
         </td>
       </tr>
     </tbody>
@@ -26,4 +27,5 @@
 
   <app-admin-product-detail [product]="selectedProduct"></app-admin-product-detail>
   <app-admin-product-form *ngIf="isAdding"></app-admin-product-form>
+  <app-admin-product-reactive-form [product]="selectedProduct" *ngIf="isEditting"></app-admin-product-reactive-form>
 </div>

@@ -13,6 +13,6 @@ import { ForbiddenNameDirective } from './directives/forbidden-name.directive';
   imports: [
     CommonModule
   ],
-  exports: [QuantityComponent, PricePipe, DiscountPipe, PopupConfirmComponent]
+  exports: [QuantityComponent, PricePipe, DiscountPipe, PopupConfirmComponent, ForbiddenNameDirective]
 })
 export class SharedModule { }
