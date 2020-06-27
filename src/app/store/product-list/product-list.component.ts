@@ -1,8 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { products } from 'src/app/shared/mock-data/product-list';
 import { Product } from 'src/app/shared/models/product';
-import { StoreService } from '../services/store.service';
 import { LoggingService } from 'src/app/shared/services/logging.service';
+import { ProductService } from 'src/app/shared/services/product.service';
 
 
 @Component({
@@ -11,18 +14,34 @@ import { LoggingService } from 'src/app/shared/services/logging.service';
   styleUrls: ['./product-list.component.scss'],
   providers: [LoggingService]
 })
-export class ProductListComponent implements OnInit {
-  @Output() selectProduct = new EventEmitter<string>();
-
+export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   publishers: string[];
   authors: string[];
-  originProducts = products;
+  isFetchData = false;
+  private unsubscribeAll: Subject<any>;
 
-  constructor(private storeService: StoreService, private logService: LoggingService) { }
+  constructor(
+    private productService: ProductService,
+    private logService: LoggingService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.unsubscribeAll = new Subject();
+  }
 
   ngOnInit(): void {
-    this.products = products;
+    this.isFetchData = true;
+    this.productService.getProducts().pipe(
+      takeUntil(this.unsubscribeAll)
+    ).subscribe(result => {
+      this.products = result;
+      this.isFetchData = false;
+    });
+    this.route.queryParams.pipe(
+      takeUntil(this.unsubscribeAll)
+    ).subscribe(params => console.log(params));
+
     const publishersObj = {};
     const authorsObj = {};
     products.forEach(ele => {
@@ -33,21 +52,23 @@ export class ProductListComponent implements OnInit {
     this.authors = Object.keys(authorsObj);
   }
 
-  trackByFn(index, item) {
-    return item.id;
+  ngOnDestroy(): void {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
   }
 
   onSelectedProduct(productId): void {
-    this.selectProduct.emit(productId);
-    // this.storeService.setSelectedProductId(productId);
+    // this.router.navigateByUrl(`/store/product/${productId}`);
+    // this.router.navigate(['store', 'product', productId]);
+    this.router.navigate(['product', productId], { relativeTo: this.route, queryParams: { order: 'popular' } });
   }
 
   search(searchValue): void {
     this.logService.logToConsole(searchValue);
-    // const lsSearchValue = searchValue.toLocaleLowerCase();
+    // const lcSearchValue = searchValue.toLocaleLowerCase();
     // this.products = this.originProducts.filter(
-    //   ele => ele.title.toLocaleLowerCase().includes(lsSearchValue)
-    //   || ele.author.toLocaleLowerCase().includes(lsSearchValue)
+    //   ele => ele.title.toLocaleLowerCase().includes(lcSearchValue)
+    //   || ele.author.toLocaleLowerCase().includes(lcSearchValue)
     // );
   }
 

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Product } from '../models/product';
@@ -34,8 +34,10 @@ export class ProductService {
     );
   }
 
-  getProductById(pid) {
-    return this.http.get(`https://book-store-f2689.firebaseio.com/product/${pid}.json`);
+  getProductById(pid): Observable<Product> {
+    return this.http.get(`https://book-store-f2689.firebaseio.com/product/${pid}.json`).pipe(
+      map(result => ({ ...new Product(result), id: pid}))
+    );
   }
 
   updateProduct(product: Product) {

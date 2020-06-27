@@ -9,6 +9,7 @@ import { AdminProductListComponent } from './product/admin-product-list/admin-pr
 import {
   AdminProductReactiveFormComponent,
 } from './product/admin-product-reactive-form/admin-product-reactive-form.component';
+import { AdminRoutingModule } from './admin-routing.module';
 
 
 
@@ -16,6 +17,7 @@ import {
   declarations: [AdminProductListComponent, AdminProductDetailComponent, AdminProductFormComponent, AdminProductReactiveFormComponent],
   imports: [
     CommonModule,
+    AdminRoutingModule,
     SharedModule,
     FormsModule,
     ReactiveFormsModule
