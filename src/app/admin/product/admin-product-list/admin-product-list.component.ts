@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Product } from 'src/app/shared/models/product';
 import { ProductService } from 'src/app/shared/services/product.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-admin-product-list',
@@ -12,29 +13,39 @@ export class AdminProductListComponent implements OnInit, OnDestroy {
   @ViewChild('btnClosePopup') btnCloseConfirmPopup;
 
   products: Product[] = [];
-  selectedProduct: Product;
-  isAdding = false;
-  isEditting = false;
+  isFetching = true;
 
   subscription: Subscription;
 
-  constructor(private productService: ProductService) { }
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe(result => this.products = result);
+    this.productService.getProducts().subscribe(result => {
+      this.isFetching = false;
+      this.products = result;
+    });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  addProduct() {
+    this.router.navigate(['product', 'new'], { relativeTo: this.route });
   }
 
   viewDetail(product: Product): void {
-    this.selectedProduct = product;
+    this.router.navigate(['product', product.id], { relativeTo: this.route });
   }
 
   editProduct(product: Product) {
-    this.selectedProduct = product;
-    this.isEditting = true;
+    this.router.navigate(['product', product.id, 'edit'], { relativeTo: this.route });
   }
 
   deleteProduct(product: Product) {

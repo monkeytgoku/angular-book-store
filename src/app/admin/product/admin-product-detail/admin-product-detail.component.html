@@ -1,6 +1,9 @@
-<div class="row product-detail" *ngIf="product">
+<div *ngIf="!isFetching" class="row product-detail fit-body">
   <div class="col-md-12">
-    <h3>{{ product.title }}</h3>
+    <div style="display: flex; justify-content: space-between;">
+      <h3>{{ product.title }}</h3>
+      <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
+    </div>
   </div>
   <div class="col-md-4">
       <img class="product__image"
@@ -73,4 +76,7 @@
       </div>
     </div> -->
   </div>
+</div>
+<div *ngIf="isFetching" class="fit-body">
+  <app-loading></app-loading>
 </div>

@@ -1,5 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { publishers } from 'src/app/shared/mock-data/publisher-list';
 import { Product } from 'src/app/shared/models/product';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -9,34 +13,64 @@ import { ProductService } from 'src/app/shared/services/product.service';
   templateUrl: './admin-product-reactive-form.component.html',
   styleUrls: ['./admin-product-reactive-form.component.scss']
 })
-export class AdminProductReactiveFormComponent implements OnInit {
-  @Input() product: Product;
-
+export class AdminProductReactiveFormComponent implements OnInit, OnDestroy {
   productForm: FormGroup;
   publishers = [];
+  isLoading = true;
 
-  constructor(private fb: FormBuilder, private productService: ProductService) { }
+  unsubscribeAll: Subject<any>;
+
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
+    this.unsubscribeAll = new Subject();
     this.publishers = publishers;
+    this.route.params.pipe(
+      takeUntil(this.unsubscribeAll),
+      map(params => params.pid),
+      switchMap(pid => this.productService.getProductById(pid))
+    ).subscribe(product => {
+      this.isLoading = false;
+      this.initForm(product);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
+  }
+
+  initForm(product): void {
     this.productForm = this.fb.group({
-      id: this.fb.control(this.product.id),
-      title: this.fb.control(this.product.title, Validators.required),
-      imageUrl: this.fb.control(this.product.imageUrl, [Validators.required, Validators.pattern('(http(s?)://).+\.(jpg|jpeg|gif|png)')]),
-      author: this.fb.control(this.product.author, Validators.required),
-      finalPrice: this.fb.control(this.product.finalPrice, Validators.required),
-      regularPrice: this.fb.control(this.product.regularPrice, Validators.required),
-      publisher: this.fb.control(this.product.publisher, Validators.required),
-      publishedDate: this.fb.control(this.product.publishedDate),
-      size: this.fb.control(this.product.size),
-      pageCount: this.fb.control(this.product.pageCount),
-      isTikiNow: this.fb.control(this.product.isTikiNow)
+      id: this.fb.control(product.id),
+      title: this.fb.control(product.title, Validators.required),
+      imageUrl: this.fb.control(product.imageUrl, [Validators.required, Validators.pattern('(http(s?)://).+\.(jpg|jpeg|gif|png)')]),
+      author: this.fb.control(product.author, Validators.required),
+      finalPrice: this.fb.control(product.finalPrice, Validators.required),
+      regularPrice: this.fb.control(product.regularPrice, Validators.required),
+      publisher: this.fb.control(product.publisher, Validators.required),
+      publishedDate: this.fb.control(product.publishedDate),
+      size: this.fb.control(product.size),
+      pageCount: this.fb.control(product.pageCount),
+      isTikiNow: this.fb.control(product.isTikiNow)
     });
   }
 
   submit(): void {
     const product = new Product(this.productForm.value);
-    this.productService.updateProduct(product).subscribe(result => console.log(result));
+    this.productService.updateProduct(product).pipe(
+      takeUntil(this.unsubscribeAll)
+    ).subscribe(result => this.router.navigateByUrl('/admin'));
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

@@ -2,11 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { products } from 'src/app/shared/mock-data/product-list';
 import { Product } from 'src/app/shared/models/product';
 import { LoggingService } from 'src/app/shared/services/logging.service';
 import { ProductService } from 'src/app/shared/services/product.service';
-
 
 @Component({
   selector: 'app-product-list',
@@ -37,14 +35,19 @@ export class ProductListComponent implements OnInit, OnDestroy {
     ).subscribe(result => {
       this.products = result;
       this.isFetchData = false;
+      this.setFilters();
     });
     this.route.queryParams.pipe(
       takeUntil(this.unsubscribeAll)
     ).subscribe(params => console.log(params));
 
+
+  }
+
+  setFilters() {
     const publishersObj = {};
     const authorsObj = {};
-    products.forEach(ele => {
+    this.products.forEach(ele => {
       publishersObj[ele.publisher] = ele.publisher;
       authorsObj[ele.author] = ele.author;
     });
@@ -58,8 +61,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   onSelectedProduct(productId): void {
-    // this.router.navigateByUrl(`/store/product/${productId}`);
-    // this.router.navigate(['store', 'product', productId]);
     this.router.navigate(['product', productId], { relativeTo: this.route, queryParams: { order: 'popular' } });
   }
 

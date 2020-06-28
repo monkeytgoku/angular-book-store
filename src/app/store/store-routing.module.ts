@@ -8,17 +8,12 @@ import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { MyFavoritesComponent } from './my-favorites/my-favorites.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProductListComponent,
-    children: [
-      {
-        path: '',
-        component: OrderSuccessComponent
-      }
-    ]
+    component: ProductListComponent
   },
   {
     path: 'product/:pid',
@@ -41,8 +36,12 @@ const routes: Routes = [
     component: OrderSuccessComponent
   },
   {
-    path: 'my-oders',
+    path: 'my-orders',
     component: MyOrdersComponent
+  },
+  {
+    path: 'my-favorites',
+    component: MyFavoritesComponent
   }
 ];
 

@@ -1,4 +1,4 @@
-<form ngForm #productForm="ngForm" class="needs-validation" novalidate class="product-form">
+<form ngForm #productForm="ngForm" class="needs-validation" novalidate class="product-form fit-body">
   <div class="form-row">
     <div class="col-md-4">
       <img class="product__image" [src]="imageUrl.value" [alt]="title.value" style="width: 100%;">
@@ -99,6 +99,7 @@
     </div>
   </div>
   <div style="text-align: right;margin-top: 15px;">
+    <button class="btn btn-secondary" style="margin-right: 10px;" (click)="goBack()">Cancel</button>
     <button class="btn btn-primary" [disabled]="productForm.invalid" (click)="submit(productForm)">Submit</button>
   </div>
 </form>

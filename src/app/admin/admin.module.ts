@@ -10,11 +10,12 @@ import {
   AdminProductReactiveFormComponent,
 } from './product/admin-product-reactive-form/admin-product-reactive-form.component';
 import { AdminRoutingModule } from './admin-routing.module';
+import { AdminOrderComponent } from './admin-order/admin-order.component';
 
 
 
 @NgModule({
-  declarations: [AdminProductListComponent, AdminProductDetailComponent, AdminProductFormComponent, AdminProductReactiveFormComponent],
+  declarations: [AdminProductListComponent, AdminProductDetailComponent, AdminProductFormComponent, AdminProductReactiveFormComponent, AdminOrderComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

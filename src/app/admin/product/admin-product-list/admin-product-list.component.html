@@ -1,8 +1,8 @@
 <div class="fit-body">
   <div style="text-align: right; padding-bottom: 15px;">
-    <button type="button" class="btn btn-primary" (click)="isAdding = !isAdding">Add Product</button>
+    <button type="button" class="btn btn-primary" (click)="addProduct()">Add Product</button>
   </div>
-  <table class="table table-hover">
+  <table class="table table-hover" aria-describedby="product-list">
     <thead>
       <tr>
         <th scope="col">Title</th>
@@ -12,20 +12,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let p of products">
-        <td>{{ p.title }}</td>
-        <td>{{ p.author }}</td>
-        <td>{{ p.publisher }}</td>
-        <td>
-          <button type="button" class="btn btn-info" (click)="viewDetail(p)">Detail</button>
-          <button type="button" class="btn btn-success" (click)="editProduct(p)">Edit</button>
-          <button type="button" class="btn btn-danger" (click)="deleteProduct(p)" data-toggle="modal" data-target="#popupConfirm">Delete</button>
+      <ng-container *ngIf="!isFetching">
+        <tr *ngFor="let p of products">
+          <td>{{ p.title }}</td>
+          <td>{{ p.author }}</td>
+          <td>{{ p.publisher }}</td>
+          <td>
+            <button type="button" class="btn btn-info" (click)="viewDetail(p)">Detail</button>
+            <button type="button" class="btn btn-success" (click)="editProduct(p)">Edit</button>
+            <button type="button" class="btn btn-danger" (click)="deleteProduct(p)">Delete</button>
+          </td>
+        </tr>
+      </ng-container>
+      <tr *ngIf="isFetching">
+        <td colspan="4">
+          <app-loading></app-loading>
         </td>
       </tr>
     </tbody>
   </table>
-
-  <app-admin-product-detail [product]="selectedProduct"></app-admin-product-detail>
-  <app-admin-product-form *ngIf="isAdding"></app-admin-product-form>
-  <app-admin-product-reactive-form [product]="selectedProduct" *ngIf="isEditting"></app-admin-product-reactive-form>
 </div>

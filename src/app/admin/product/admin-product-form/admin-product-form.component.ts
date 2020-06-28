@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { publishers } from 'src/app/shared/mock-data/publisher-list';
 import { Product } from 'src/app/shared/models/product';
@@ -15,18 +17,29 @@ export class AdminProductFormComponent implements OnInit, OnDestroy {
   publishers = [];
   subcription: Subscription;
 
-  constructor(private productService: ProductService) { }
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
     this.publishers = publishers;
   }
 
-  submit(productForm) {
-    const product = new Product(productForm.value);
-    this.subcription = this.productService.createProduct(product).subscribe(result => console.log(result));
+  ngOnDestroy(): void {
+    if (this.subcription) {
+      this.subcription.unsubscribe();
+    }
   }
 
-  ngOnDestroy() {
-    this.subcription.unsubscribe();
+  submit(productForm): void {
+    const product = new Product(productForm.value);
+    this.subcription = this.productService.createProduct(product)
+      .subscribe(result => this.router.navigateByUrl('/admin'), err => alert(err.message));
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
