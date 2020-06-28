@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AppUser } from 'src/app/shared/models/app-user';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Router } from '@angular/router';
+import { FirebaseAuthService } from 'src/app/shared/services/firebase-auth.service';
+import { User } from 'firebase';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   user: AppUser;
+  firebaseUser: User;
   isLoggedInUser = false;
   notifys = [
     {
@@ -25,20 +28,27 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private firebaseAuth: FirebaseAuthService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.authService.$isLoggedInUser.subscribe(result => {
+    this.firebaseAuth.$isLoggedInUser.subscribe(result => {
       this.isLoggedInUser = result;
       if (result) {
-        this.user = this.authService.appUser;
+        this.firebaseUser = this.firebaseAuth.firebaseUser;
       }
     });
+    // this.authService.$isLoggedInUser.subscribe(result => {
+    //   this.isLoggedInUser = result;
+    //   if (result) {
+    //     this.user = this.authService.appUser;
+    //   }
+    // });
   }
 
   logout() {
-    this.authService.logout();
+    this.firebaseAuth.logout();
   }
 
   goToCart() {

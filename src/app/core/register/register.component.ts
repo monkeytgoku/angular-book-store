@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { forbiddenNameValidator } from 'src/app/shared/directives/forbidden-name.directive';
+import { FirebaseAuthService } from 'src/app/shared/services/firebase-auth.service';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,9 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private firebaseAuth: FirebaseAuthService
+  ) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -29,6 +32,8 @@ export class RegisterComponent implements OnInit {
 
   register(): void {
     console.log(this.registerForm.value);
-    this.btnCloseModal.nativeElement.click();
+    this.firebaseAuth.register(
+      this.registerForm.value.email, this.registerForm.value.password, this.registerForm.value.name
+    ).then(() => this.btnCloseModal.nativeElement.click());
   }
 }

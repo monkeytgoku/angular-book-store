@@ -71,3 +71,6 @@ update angular.json
 this.router.navigateByUrl(`/store/product/${productId}`);
 this.router.navigate(['store', 'product', productId]);
 this.router.navigate(['product', productId], { relativeTo: this.route, queryParams: {order: 'popular' } });
+
+### Firebase
+npm install firebase @angular/fire --save
