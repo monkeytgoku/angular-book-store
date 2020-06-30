@@ -74,3 +74,10 @@ this.router.navigate(['product', productId], { relativeTo: this.route, queryPara
 
 ### Firebase
 npm install firebase @angular/fire --save
+
+#### Deploy to firebase
+ng build --prod
+npm install -g firebase-tools
+firebase login
+firebase init
+firebase deploy
