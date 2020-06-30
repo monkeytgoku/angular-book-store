@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { forbiddenNameValidator } from 'src/app/shared/directives/forbidden-name.directive';
-import { FirebaseAuthService } from 'src/app/shared/services/firebase-auth.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,10 +12,13 @@ import { FirebaseAuthService } from 'src/app/shared/services/firebase-auth.servi
 export class RegisterComponent implements OnInit {
   @ViewChild('btnCloseModal') btnCloseModal;
 
+  isLoading = false;
+  error = '';
+  subscription: Subscription;
   registerForm: FormGroup;
 
   constructor(
-    private firebaseAuth: FirebaseAuthService
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -31,9 +35,23 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    console.log(this.registerForm.value);
-    this.firebaseAuth.register(
-      this.registerForm.value.email, this.registerForm.value.password, this.registerForm.value.name
-    ).then(() => this.btnCloseModal.nativeElement.click());
+    if (!this.registerForm.valid) {
+      return;
+    }
+    this.isLoading = true;
+    this.authService.signup(
+      this.registerForm.value.email,
+      this.registerForm.value.password,
+      this.registerForm.value.name,
+      this.registerForm.value.mobile).subscribe(
+      resData => {
+        this.isLoading = false;
+        this.btnCloseModal.nativeElement.click();
+      },
+      errorMessage => {
+        this.error = errorMessage;
+        this.isLoading = false;
+      }
+    );
   }
 }

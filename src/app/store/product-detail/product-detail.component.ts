@@ -1,10 +1,9 @@
-import { Component, OnInit, Input, OnChanges, SimpleChange } from '@angular/core';
-import { products } from 'src/app/shared/mock-data/product-list';
-import { Product } from 'src/app/shared/models/product';
-import { StoreService } from '../services/store.service';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Product } from 'src/app/shared/models/product';
 import { ProductService } from 'src/app/shared/services/product.service';
-import { map, switchMap } from 'rxjs/operators';
+import { isArray } from 'util';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,11 +12,12 @@ import { map, switchMap } from 'rxjs/operators';
 })
 export class ProductDetailComponent implements OnInit {
   product: Product;
+  quantity = 1;
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private router: Router) { }
+    private storeService: StoreService) { }
 
   ngOnInit(): void {
     console.log(this.route.snapshot.paramMap.get('pid'));
@@ -31,8 +31,18 @@ export class ProductDetailComponent implements OnInit {
   }
 
   handleChangedQuantity(quantity) {
-    console.log(quantity);
-    this.router.navigateByUrl('store/product/-MAo0J1GEigesTMdG7hX');
+    this.quantity = quantity;
+  }
+
+  addToCart() {
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    if (cart && Array.isArray(cart)) {
+      cart.push({ product: this.product, quantity: this.quantity });
+    } else {
+      cart = [{ product: this.product, quantity: this.quantity }];
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    this.storeService.updateCart();
   }
 
 }

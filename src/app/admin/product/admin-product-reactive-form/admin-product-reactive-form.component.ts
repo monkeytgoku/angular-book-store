@@ -7,13 +7,14 @@ import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { publishers } from 'src/app/shared/mock-data/publisher-list';
 import { Product } from 'src/app/shared/models/product';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate.guard';
 
 @Component({
   selector: 'app-admin-product-reactive-form',
   templateUrl: './admin-product-reactive-form.component.html',
   styleUrls: ['./admin-product-reactive-form.component.scss']
 })
-export class AdminProductReactiveFormComponent implements OnInit, OnDestroy {
+export class AdminProductReactiveFormComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   productForm: FormGroup;
   publishers = [];
   isLoading = true;
@@ -44,6 +45,14 @@ export class AdminProductReactiveFormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribeAll.next();
     this.unsubscribeAll.complete();
+  }
+
+  canDeactivate() {
+    if (this.productForm.dirty) {
+      const res = confirm('Do you want to leave this site?\nChanges you made may not be saved.');
+      return res;
+    }
+    return true;
   }
 
   initForm(product): void {

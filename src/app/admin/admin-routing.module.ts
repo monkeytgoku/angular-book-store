@@ -6,6 +6,7 @@ import { AdminProductListComponent } from './product/admin-product-list/admin-pr
 import { AdminProductFormComponent } from './product/admin-product-form/admin-product-form.component';
 import { AdminProductReactiveFormComponent } from './product/admin-product-reactive-form/admin-product-reactive-form.component';
 import { AdminOrderComponent } from './admin-order/admin-order.component';
+import { CanDeactivateGuard } from '../shared/guards/can-deactivate.guard';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
   },
   {
     path: 'product/new',
-    component: AdminProductFormComponent
+    component: AdminProductFormComponent,
+    canDeactivate: [CanDeactivateGuard]
   },
   {
     path: 'product/:pid',
@@ -22,7 +24,8 @@ const routes: Routes = [
   },
   {
     path: 'product/:pid/edit',
-    component: AdminProductReactiveFormComponent
+    component: AdminProductReactiveFormComponent,
+    canDeactivate: [CanDeactivateGuard]
   },
   {
     path: 'orders',

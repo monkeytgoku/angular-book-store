@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/auth.service';
 import { Subscription } from 'rxjs';
-import { FirebaseAuthService } from 'src/app/shared/services/firebase-auth.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,44 +10,41 @@ import { FirebaseAuthService } from 'src/app/shared/services/firebase-auth.servi
 export class LoginComponent implements OnInit {
   @ViewChild('btnCloseModal') btnCloseModal;
 
-  invalidUser = false;
+  isLoading = false;
+  error = '';
   subscription: Subscription;
 
-  constructor(
-    private authService: AuthService,
-    private firebaseAuth: FirebaseAuthService
-  ) { }
+  constructor( private authService: AuthService ) { }
 
   ngOnInit(): void {
   }
 
   login(loginForm): void {
-    this.invalidUser = false;
-    const user = loginForm.value;
-    this.firebaseAuth.login(user.email, user.password).then(
-      () => {
-        this.invalidUser = false;
+    if (!loginForm.valid) {
+      return;
+    }
+    const email = loginForm.value.email;
+    const password = loginForm.value.password;
+    this.isLoading = true;
+    this.subscription = this.authService.login(email, password).subscribe(
+      resData => {
+        this.isLoading = false;
         this.btnCloseModal.nativeElement.click();
+        this.authService.navigateAfterLogin();
+      },
+      errorMessage => {
+        this.error = errorMessage;
+        this.isLoading = false;
       }
-    ).catch(
-      () => this.invalidUser = true
     );
-    // this.subscription = this.authService.login(user).subscribe(result => {
-    //   if (result) {
-    //     this.invalidUser = false;
-    //     this.btnCloseModal.nativeElement.click();
-    //   } else {
-    //     this.invalidUser = true;
-    //   }
-    // });
   }
 
   closeModal(loginForm): void {
-    this.invalidUser = false;
+    this.error = '';
     loginForm.reset();
-    // if (this.subscription) {
-    //   this.subscription.unsubscribe();
-    // }
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

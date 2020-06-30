@@ -9,16 +9,9 @@ import { AuthService } from './shared/services/auth.service';
 })
 
 export class AppComponent implements OnInit {
-  selectedProductId: string;
-
-  constructor(private authService: AuthService) {
-    authService.refreshToken();
-  }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-  }
-
-  handleSelectedProduct(productId: string): void {
-    this.selectedProductId = productId;
+    this.authService.autoLogin();
   }
 }

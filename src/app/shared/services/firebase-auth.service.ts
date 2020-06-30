@@ -18,21 +18,21 @@ export class FirebaseAuthService {
     public afAuth: AngularFireAuth,
     public router: Router
   ) {
+    console.log('FirebaseAuthService');
     this.afAuth.authState.subscribe(user => {
-      console.log('constructor', user);
       if (user && user.emailVerified) {
         this.user = user;
-        localStorage.setItem('currentUser', JSON.stringify(this.user));
+        localStorage.setItem('userData', JSON.stringify(this.user));
         this.isLoggedInUser.next(true);
       } else {
         this.isLoggedInUser.next(false);
-        localStorage.setItem('currentUser', null);
+        localStorage.setItem('userData', null);
       }
     });
   }
 
   get firebaseUser(): User {
-    return JSON.parse(localStorage.getItem('currentUser'));
+    return JSON.parse(localStorage.getItem('userData'));
   }
 
   async login(email: string, password: string) {
@@ -58,12 +58,12 @@ export class FirebaseAuthService {
 
   async logout() {
     await this.afAuth.signOut();
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('userData');
     this.isLoggedInUser.next(false);
   }
 
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
+    const user = JSON.parse(localStorage.getItem('userData'));
     return user !== null;
   }
 

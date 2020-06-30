@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { AppUser } from 'src/app/shared/models/app-user';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { FirebaseAuthService } from 'src/app/shared/services/firebase-auth.service';
-import { User } from 'firebase';
+import { of, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { AuthUser } from 'src/app/shared/models/auth-user';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { StoreService } from 'src/app/store/services/store.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
-  user: AppUser;
-  firebaseUser: User;
-  isLoggedInUser = false;
+export class HeaderComponent implements OnInit, OnDestroy {
+  @ViewChild('loginBtn') loginBtn;
+
+  authUser: AuthUser;
+  isAuthenticated = false;
+  isAdmin = false;
+
+  private unsubscribeAll: Subject<any>;
+
   notifys = [
     {
       content: 'Từ 29/2/2020, Tiki miễn phí giao tiêu chuẩn cho đơn hàng từ 250k, áp dụng phí 19k cho đơn hàng dưới 250k.',
@@ -28,27 +34,66 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private firebaseAuth: FirebaseAuthService,
-    private router: Router
+    private router: Router,
+    private storeService: StoreService
   ) { }
 
   ngOnInit(): void {
-    this.firebaseAuth.$isLoggedInUser.subscribe(result => {
-      this.isLoggedInUser = result;
-      if (result) {
-        this.firebaseUser = this.firebaseAuth.firebaseUser;
+    this.getCartCount();
+
+    this.unsubscribeAll = new Subject();
+
+    this.storeService.changeCart$.pipe(
+      takeUntil(this.unsubscribeAll)
+    ).subscribe(
+      res => {
+        if (res) {
+          this.getCartCount();
+        }
+      }
+    );
+
+    this.authService.authUser.pipe(
+      takeUntil(this.unsubscribeAll),
+      switchMap(authUser => {
+        this.authUser = authUser;
+        this.isAuthenticated = !!authUser;
+        if (authUser) {
+          return this.authService.getUserRoles(authUser.id);
+        }
+        return of(null);
+      })
+    ).subscribe(roles => {
+      if (roles) {
+        this.isAdmin = roles.admin;
+      } else {
+        this.isAdmin = false;
       }
     });
-    // this.authService.$isLoggedInUser.subscribe(result => {
-    //   this.isLoggedInUser = result;
-    //   if (result) {
-    //     this.user = this.authService.appUser;
-    //   }
-    // });
+
+    this.authService.showLogin.pipe(
+      takeUntil(this.unsubscribeAll)
+    ).subscribe(res => {
+      if (res) {
+        this.loginBtn.nativeElement.click();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
+  }
+
+  getCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    if (Array.isArray(cart)) {
+      this.cartCount = cart.reduce((acc, cur) => acc + cur.quantity, 0);
+    }
   }
 
   logout() {
-    this.firebaseAuth.logout();
+    this.authService.logout();
   }
 
   goToCart() {
